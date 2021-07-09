@@ -1,4 +1,4 @@
-﻿using ff_utils_winforms.Utils;
+using ff_utils_winforms.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,25 +17,69 @@ namespace ff_utils_winforms
         static string faststart = "-movflags +faststart";
         static string divBy2 = "\"crop = trunc(iw / 2) * 2:trunc(ih / 2) * 2\"";
 
-        public static async Task VideoToFrames (string inputFile, bool hdr, bool delSrc)
+        public static async Task VideoToFrames (string inputFile, bool hdr, bool delSrc, int filetypeindex,int qualitylevel , float videofps)
         {
             string frameFolderPath = Path.ChangeExtension(inputFile, null) + "-frames";
             if (!Directory.Exists(frameFolderPath))
                 Directory.CreateDirectory(frameFolderPath);
             string hdrStr = "";
             if (hdr) hdrStr = FFmpegStrings.hdrFilter;
-            string args = "-i \"" + inputFile + "\" " + hdrStr + " \"" + frameFolderPath + "/%08d.png\"";
-            await AvProcess.Run(args);
+            switch (filetypeindex)
+            {
+                case 0:
+                    if (float.IsNaN(videofps) || videofps == 0)
+                    {
+                        string args = "-i \"" + inputFile + "\" " + hdrStr + " -compression_level " + qualitylevel + " \"" + frameFolderPath + "/%08d.png\"";
+                        await AvProcess.Run(args);
+                    }
+                    else
+                    {
+                        string args = "-i \"" + inputFile + "\" " + hdrStr + " -vf " + "\"fps" + "=" + videofps + "\" " + "-compression_level " + qualitylevel + " \"" + frameFolderPath + "/%08d.png\"";
+                        await AvProcess.Run(args);
+                    }
+                    
+                    break;
+
+                case 1:
+                    if (float.IsNaN(videofps) || videofps == 0)
+                    {
+                        string args = "-i \"" + inputFile + "\" " + hdrStr + " -qscale:v " + qualitylevel +  " \"" + frameFolderPath + "/%08d.jpg\"";
+                        await AvProcess.Run(args);
+                    }
+                    else
+                    {
+                        string args = "-i \"" + inputFile + "\" " + hdrStr + " -qscale:v " + qualitylevel + " -vf " + "\"fps" + "=" + videofps + "\"" + " \"" + frameFolderPath + "/%08d.jpg\"";
+                        await AvProcess.Run(args);
+                    }
+                    
+                    break;
+            }
+
+
             DeleteSource(inputFile, delSrc);
         }
 
-        public static async Task ExtractSingleFrame(string inputFile, int frameNum, bool hdr, bool delSrc)
+        public static async Task ExtractSingleFrame(string inputFile, int frameNum, bool hdr, bool delSrc, int filetypeindex , int qualitylevel)
         {
             string hdrStr = "";
             if (hdr) hdrStr = FFmpegStrings.hdrFilter;
-            string args = "-i \"" + inputFile + "\" " + hdrStr
+            string args;
+            switch (filetypeindex)
+            {
+                case 0:
+                    args = "-i \"" + inputFile + "\" " + hdrStr + " -compression_level " + qualitylevel
                 + " -vf \"select=eq(n\\," + frameNum + ")\" -vframes 1  \"" + inputFile + "-frame" + frameNum + ".png\"";
-            await AvProcess.Run(args);
+                await AvProcess.Run(args);
+
+                    break;
+
+                case 1:
+                    args = "-i \"" + inputFile + "\" " + hdrStr + " -qscale:v " + qualitylevel
+                + " -vf \"select=eq(n\\," + frameNum + ")\" -vframes 1  \"" + inputFile + "-frame" + frameNum + ".jpg\"";
+                    await AvProcess.Run(args);
+                    break;
+            }
+            
             DeleteSource(inputFile, delSrc);
         }
 
