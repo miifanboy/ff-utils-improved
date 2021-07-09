@@ -1,4 +1,4 @@
-﻿namespace ff_utils_winforms
+namespace ff_utils_winforms
 {
     partial class Form1
     {
@@ -28,17 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.extractFramesPage = new System.Windows.Forms.TabPage();
             this.extractFramesTabcontrol = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.fpsvalue = new System.Windows.Forms.ComboBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.qualitylevel = new System.Windows.Forms.TrackBar();
+            this.filetypecombobox = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.tonemapHdrCbox = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.extractAllDelSrcCbox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.qualitylevel2 = new System.Windows.Forms.TrackBar();
+            this.label51 = new System.Windows.Forms.Label();
+            this.filetypecombo2 = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
             this.tonemapHdrCbox2 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.frameNumTbox = new System.Windows.Forms.TextBox();
@@ -89,6 +104,8 @@
             this.speedDropPanel = new System.Windows.Forms.Panel();
             this.speedTabControl = new System.Windows.Forms.TabControl();
             this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.changeSpeedAudio = new System.Windows.Forms.CheckBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.changeSpeedCombox = new System.Windows.Forms.ComboBox();
             this.label46 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
@@ -155,13 +172,17 @@
             this.label68 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
             this.logTbox = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.changeSpeedAudio = new System.Windows.Forms.CheckBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.trackbarvalue = new System.Windows.Forms.ToolTip(this.components);
+            this.trackbarvalue2 = new System.Windows.Forms.ToolTip(this.components);
+            this.label62 = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.extractFramesPage.SuspendLayout();
             this.extractFramesTabcontrol.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.qualitylevel)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.qualitylevel2)).BeginInit();
             this.framesToVideoPage.SuspendLayout();
             this.createVidTabControl.SuspendLayout();
             this.framesToVidTab.SuspendLayout();
@@ -227,6 +248,15 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label62);
+            this.tabPage3.Controls.Add(this.fpsvalue);
+            this.tabPage3.Controls.Add(this.label61);
+            this.tabPage3.Controls.Add(this.label49);
+            this.tabPage3.Controls.Add(this.label48);
+            this.tabPage3.Controls.Add(this.label38);
+            this.tabPage3.Controls.Add(this.qualitylevel);
+            this.tabPage3.Controls.Add(this.filetypecombobox);
+            this.tabPage3.Controls.Add(this.label33);
             this.tabPage3.Controls.Add(this.tonemapHdrCbox);
             this.tabPage3.Controls.Add(this.label17);
             this.tabPage3.Controls.Add(this.extractAllDelSrcCbox);
@@ -240,10 +270,89 @@
             this.tabPage3.Text = "Extract All Frames";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // fpsvalue
+            // 
+            this.fpsvalue.FormattingEnabled = true;
+            this.fpsvalue.Location = new System.Drawing.Point(387, 165);
+            this.fpsvalue.Name = "fpsvalue";
+            this.fpsvalue.Size = new System.Drawing.Size(47, 21);
+            this.fpsvalue.TabIndex = 24;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(6, 168);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(113, 13);
+            this.label61.TabIndex = 23;
+            this.label61.Text = "Video Framerate (FPS)";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.BackColor = System.Drawing.SystemColors.Control;
+            this.label49.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label49.Location = new System.Drawing.Point(209, 148);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(52, 13);
+            this.label49.TabIndex = 22;
+            this.label49.Text = "Best: 100";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.BackColor = System.Drawing.SystemColors.Control;
+            this.label48.Location = new System.Drawing.Point(409, 148);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(25, 13);
+            this.label48.TabIndex = 21;
+            this.label48.Text = "100";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(7, 116);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(132, 13);
+            this.label38.TabIndex = 20;
+            this.label38.Text = "Compression Level (1-100)";
+            // 
+            // qualitylevel
+            // 
+            this.qualitylevel.Location = new System.Drawing.Point(202, 116);
+            this.qualitylevel.Maximum = 100;
+            this.qualitylevel.Minimum = 1;
+            this.qualitylevel.Name = "qualitylevel";
+            this.qualitylevel.Size = new System.Drawing.Size(232, 45);
+            this.qualitylevel.TabIndex = 19;
+            this.qualitylevel.Value = 100;
+            this.qualitylevel.Scroll += new System.EventHandler(this.qualitylevel_Scroll);
+            // 
+            // filetypecombobox
+            // 
+            this.filetypecombobox.FormattingEnabled = true;
+            this.filetypecombobox.Items.AddRange(new object[] {
+            "PNG",
+            "JPG"});
+            this.filetypecombobox.Location = new System.Drawing.Point(387, 89);
+            this.filetypecombobox.Name = "filetypecombobox";
+            this.filetypecombobox.Size = new System.Drawing.Size(47, 21);
+            this.filetypecombobox.TabIndex = 18;
+            this.filetypecombobox.SelectedIndexChanged += new System.EventHandler(this.filetypecombobox_SelectedIndexChanged);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(7, 89);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(65, 13);
+            this.label33.TabIndex = 17;
+            this.label33.Text = "JPG or PNG";
+            // 
             // tonemapHdrCbox
             // 
             this.tonemapHdrCbox.AutoSize = true;
-            this.tonemapHdrCbox.Location = new System.Drawing.Point(321, 60);
+            this.tonemapHdrCbox.Location = new System.Drawing.Point(419, 60);
             this.tonemapHdrCbox.Name = "tonemapHdrCbox";
             this.tonemapHdrCbox.Size = new System.Drawing.Size(15, 14);
             this.tonemapHdrCbox.TabIndex = 16;
@@ -261,7 +370,7 @@
             // extractAllDelSrcCbox
             // 
             this.extractAllDelSrcCbox.AutoSize = true;
-            this.extractAllDelSrcCbox.Location = new System.Drawing.Point(321, 34);
+            this.extractAllDelSrcCbox.Location = new System.Drawing.Point(419, 34);
             this.extractAllDelSrcCbox.Name = "extractAllDelSrcCbox";
             this.extractAllDelSrcCbox.Size = new System.Drawing.Size(15, 14);
             this.extractAllDelSrcCbox.TabIndex = 7;
@@ -289,6 +398,12 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label53);
+            this.tabPage4.Controls.Add(this.label58);
+            this.tabPage4.Controls.Add(this.qualitylevel2);
+            this.tabPage4.Controls.Add(this.label51);
+            this.tabPage4.Controls.Add(this.filetypecombo2);
+            this.tabPage4.Controls.Add(this.label50);
             this.tabPage4.Controls.Add(this.tonemapHdrCbox2);
             this.tabPage4.Controls.Add(this.label8);
             this.tabPage4.Controls.Add(this.frameNumTbox);
@@ -303,6 +418,68 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Extract Single Frame";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.BackColor = System.Drawing.SystemColors.Control;
+            this.label53.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label53.Location = new System.Drawing.Point(242, 165);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(52, 13);
+            this.label53.TabIndex = 25;
+            this.label53.Text = "Best: 100";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.BackColor = System.Drawing.SystemColors.Control;
+            this.label58.Location = new System.Drawing.Point(442, 165);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(25, 13);
+            this.label58.TabIndex = 24;
+            this.label58.Text = "100";
+            // 
+            // qualitylevel2
+            // 
+            this.qualitylevel2.Location = new System.Drawing.Point(235, 133);
+            this.qualitylevel2.Maximum = 100;
+            this.qualitylevel2.Minimum = 1;
+            this.qualitylevel2.Name = "qualitylevel2";
+            this.qualitylevel2.Size = new System.Drawing.Size(232, 45);
+            this.qualitylevel2.TabIndex = 23;
+            this.qualitylevel2.Value = 100;
+            this.qualitylevel2.Scroll += new System.EventHandler(this.qualitylevel2_Scroll);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(7, 133);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(132, 13);
+            this.label51.TabIndex = 21;
+            this.label51.Text = "Compression Level (1-100)";
+            // 
+            // filetypecombo2
+            // 
+            this.filetypecombo2.FormattingEnabled = true;
+            this.filetypecombo2.Items.AddRange(new object[] {
+            "PNG",
+            "JPG"});
+            this.filetypecombo2.Location = new System.Drawing.Point(321, 105);
+            this.filetypecombo2.Name = "filetypecombo2";
+            this.filetypecombo2.Size = new System.Drawing.Size(47, 21);
+            this.filetypecombo2.TabIndex = 19;
+            this.filetypecombo2.SelectedIndexChanged += new System.EventHandler(this.filetypecombo2_SelectedIndexChanged);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(7, 108);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(65, 13);
+            this.label50.TabIndex = 18;
+            this.label50.Text = "JPG or PNG";
             // 
             // tonemapHdrCbox2
             // 
@@ -868,6 +1045,24 @@
             this.tabPage15.TabIndex = 1;
             this.tabPage15.Text = "Change Speed Losslessly";
             this.tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // changeSpeedAudio
+            // 
+            this.changeSpeedAudio.AutoSize = true;
+            this.changeSpeedAudio.Location = new System.Drawing.Point(298, 60);
+            this.changeSpeedAudio.Name = "changeSpeedAudio";
+            this.changeSpeedAudio.Size = new System.Drawing.Size(15, 14);
+            this.changeSpeedAudio.TabIndex = 28;
+            this.changeSpeedAudio.UseVisualStyleBackColor = true;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(7, 60);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(254, 13);
+            this.label32.TabIndex = 16;
+            this.label32.Text = "Process Audio As Well (Only works for 50% or faster)";
             // 
             // changeSpeedCombox
             // 
@@ -1628,23 +1823,14 @@
             this.logTbox.TabIndex = 8;
             this.logTbox.Text = "Ready...";
             // 
-            // label32
+            // label62
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(7, 60);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(254, 13);
-            this.label32.TabIndex = 16;
-            this.label32.Text = "Process Audio As Well (Only works for 50% or faster)";
-            // 
-            // changeSpeedAudio
-            // 
-            this.changeSpeedAudio.AutoSize = true;
-            this.changeSpeedAudio.Location = new System.Drawing.Point(298, 60);
-            this.changeSpeedAudio.Name = "changeSpeedAudio";
-            this.changeSpeedAudio.Size = new System.Drawing.Size(15, 14);
-            this.changeSpeedAudio.TabIndex = 28;
-            this.changeSpeedAudio.UseVisualStyleBackColor = true;
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(207, 168);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(174, 13);
+            this.label62.TabIndex = 25;
+            this.label62.Text = "Leave this empty to use input fps ->";
             // 
             // Form1
             // 
@@ -1666,8 +1852,10 @@
             this.extractFramesTabcontrol.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.qualitylevel)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.qualitylevel2)).EndInit();
             this.framesToVideoPage.ResumeLayout(false);
             this.framesToVideoPage.PerformLayout();
             this.createVidTabControl.ResumeLayout(false);
@@ -1841,6 +2029,24 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.CheckBox changeSpeedAudio;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox filetypecombobox;
+        private System.Windows.Forms.Label label33;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TrackBar qualitylevel;
+        private System.Windows.Forms.ToolTip trackbarvalue;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.ComboBox filetypecombo2;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TrackBar qualitylevel2;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.ToolTip trackbarvalue2;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.ComboBox fpsvalue;
+        private System.Windows.Forms.Label label62;
     }
 }
 
