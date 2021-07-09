@@ -1,4 +1,4 @@
-﻿using ff_utils_winforms.GuiHelpers;
+using ff_utils_winforms.GuiHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +38,8 @@ namespace ff_utils_winforms
             InitCombox(comparisonType, 0);
             InitCombox(comparisonCrf, 1);
             InitCombox(delayTrackCombox, 0);
+            InitCombox(filetypecombobox, 0);
+            InitCombox(filetypecombo2, 0);
         }
 
         void InitCombox(ComboBox cbox, int index)
@@ -69,13 +71,13 @@ namespace ff_utils_winforms
             if (extractFramesTabcontrol.SelectedIndex == 0)
             {
                 foreach (string file in files)
-                    await FFmpegCommands.VideoToFrames(file, tonemapHdrCbox2.Checked, extractAllDelSrcCbox.Checked);
+                    await FFmpegCommands.VideoToFrames(file, tonemapHdrCbox2.Checked, extractAllDelSrcCbox.Checked , filetypecombobox.SelectedIndex,qualitylevel.Value, fpsvalue.GetFloat());
             }
             if (extractFramesTabcontrol.SelectedIndex == 1)
             {
                 int frameNum = frameNumTbox.GetInt();
                 foreach (string file in files)
-                    await FFmpegCommands.ExtractSingleFrame(file, frameNum, tonemapHdrCbox2.Checked, extractSingleDelSrcCbox.Checked);
+                    await FFmpegCommands.ExtractSingleFrame(file, frameNum, tonemapHdrCbox2.Checked, extractSingleDelSrcCbox.Checked , filetypecombo2.SelectedIndex,qualitylevel2.Value);
             }
         }
 
@@ -171,6 +173,68 @@ namespace ff_utils_winforms
             FFmpegCommands.Track track = (delayTrackCombox.SelectedIndex == 0) ? FFmpegCommands.Track.Audio : FFmpegCommands.Track.Video;
             foreach (string file in files)
                 await FFmpegCommands.Delay(file, track, delayAmount.Text.GetFloat(), false);
+        }
+
+        private void qualitylevel_Scroll(object sender, EventArgs e)
+        {
+            label48.Text = qualitylevel.Value.ToString();
+            trackbarvalue.SetToolTip(qualitylevel, qualitylevel.Value.ToString());
+        }
+
+        private void qualitylevel2_Scroll(object sender, EventArgs e)
+        {
+            label58.Text = qualitylevel2.Value.ToString();
+            trackbarvalue2.SetToolTip(qualitylevel2, qualitylevel2.Value.ToString());
+        }
+
+        private void filetypecombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (filetypecombobox.SelectedIndex)
+            {
+                case 0:
+
+                    label48.Text = "100";
+                    label38.Text = "Compression Level (1-100)";
+                    label49.Text = "Best: 100";
+                    qualitylevel.Minimum = 1;
+                    qualitylevel.Maximum = 100;
+                    qualitylevel.Value = 100;
+                    break;
+                case 1:
+                    label48.Text = "2";
+                    label38.Text = "Quality Level (2-31)";
+                    label49.Text = "Best: 2-5 (Lower is better)";
+                    qualitylevel.Minimum = 2;
+                    qualitylevel.Maximum = 31;
+                    qualitylevel.Value = 2;
+                    break;
+            }
+                
+
+        }
+
+        private void filetypecombo2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (filetypecombo2.SelectedIndex)
+            {
+                case 0:
+
+                    label58.Text = "100";
+                    label51.Text = "Compression Level (1-100)";
+                    label53.Text = "Best: 100";
+                    qualitylevel2.Minimum = 1;
+                    qualitylevel2.Maximum = 100;
+                    qualitylevel2.Value = 100;
+                    break;
+                case 1:
+                    label58.Text = "2";
+                    label51.Text = "Quality Level (2-31)";
+                    label53.Text = "Best: 2-5 (Lower is better)";
+                    qualitylevel2.Minimum = 2;
+                    qualitylevel2.Maximum = 31;
+                    qualitylevel2.Value = 2;
+                    break;
+            }
         }
     }
 }
